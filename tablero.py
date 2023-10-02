@@ -1,3 +1,5 @@
+from variable import * # Importa la clase Variable
+
 # Representa el crucigrama: medidas y matriz correspondiente a las celdas
 class Tablero:    
     def __init__(self, FILS, COLS):
@@ -35,4 +37,28 @@ class Tablero:
     
     def setCelda(self, fila, col, val):
         self.tablero[fila][col]=val    
+    
+    #FUNCIÓN PARA SABER SI ESTA OCUPADA
+    def Ocupada(self, fila, col):
+        return self.tablero[fila][col] != '-'
+    
+    def contador_variables(self):
+        variables = []
+        for fila in range(self.alto): #FILAS
+            for col in range(self.ancho): #COLUMNAS
+                # busco variables horizontales
+                if self.Ocupada(fila, col) == False and (col == 0 or self.Ocupada(fila, col-1)):
+                    longitud = 0
+                    while col+longitud < self.ancho and self.Ocupada(fila, col+longitud) == False:
+                        longitud += 1
+                    if longitud > 1:
+                        variables.append(Variable("", fila, col, "horizontal", longitud))
+                # busco variables verticales
+                if self.Ocupada(fila, col) == False and (fila == 0 or self.Ocupada(fila-1, col)):
+                    longitud = 0
+                    while fila+longitud < self.alto and self.Ocupada(fila+longitud, col) == False:
+                        longitud += 1
+                    if longitud > 1:
+                        variables.append(Variable("", fila, col, "vertical", longitud))
+        return variables
     

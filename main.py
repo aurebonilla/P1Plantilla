@@ -183,9 +183,15 @@ def main():
         reloj.tick(40)
         if game_over==True: #retardo cuando se cierra la ventana
             pygame.time.delay(500)
+
+        # obtengo la lista de variables en el tablero
+        variables = tablero.contador_variables()
+
+        # imprimo la lista de variables encontradas
+        for variable in variables:
+            print(variable.fila, variable.columna, variable.ori, variable.tam)
     
     pygame.quit()
  
 if __name__=="__main__":
     main()
- 

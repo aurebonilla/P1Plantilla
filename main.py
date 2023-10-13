@@ -140,11 +140,13 @@ def main():
                 pos=pygame.mouse.get_pos()                
                 if pulsaBotonFC(pos, anchoVentana, altoVentana):
                     print("FC")
+                    tablero.contador_variables() #Para printear la info sobre el número de variables
                     res=False #aquí llamar al forward checking
                     if res==False:
                         MessageBox.showwarning("Alerta", "No hay solución")                                  
                 elif pulsaBotonAC3(pos, anchoVentana, altoVentana):                    
                      print("AC3")
+                     tablero.contador_variables() #Para printear la info sobre el número de variables
                 elif pulsaBotonReset(pos, anchoVentana, altoVentana):                   
                     tablero.reset()
                 elif inTablero(pos):
@@ -183,13 +185,6 @@ def main():
         reloj.tick(40)
         if game_over==True: #retardo cuando se cierra la ventana
             pygame.time.delay(500)
-
-        # obtengo la lista de variables en el tablero
-        variables = tablero.contador_variables()
-
-        # imprimo la lista de variables encontradas
-        for variable in variables:
-            print(variable.fila, variable.columna, variable.ori, variable.tam)
     
     pygame.quit()
  
